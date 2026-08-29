@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "nombre": "Juan",
+    "apellido": "Gonzalez",
+    "email": "juangonzalez@gmail.com",
+    "telefono": "351-1234567",
+    "contraseña": "pass111",
+    "activo": true
+  },
+  {
+    "id": 2,
+    "nombre": "Julieta",
+    "apellido": "Pedernera",
+    "email": "julietapedernera@gmail.com",
+    "telefono": "351-7654321",
+    "contraseña": "pass222",
+    "activo": true
+  },
+  {
+    "id": 3,
+    "nombre": "Federico",
+    "apellido": "Alvarez",
+    "email": "federicoalvarez@gmail.com",
+    "telefono": "351-9876543",
+    "contraseña": "pass333",
+    "activo": true
+  },
+ {
+    "id": 4,
+    "nombre": "Mariana",
+    "apellido": "Lopez",
+    "email": "marianalopez@gmail.com",
+    "telefono": "351-5555555",
+    "contraseña": "pass444",
+    "activo": true
+    },
+    {
+    "id": 5,
+    "nombre": "Santiago",
+    "apellido": "Martinez",
+    "email": "santiagomartinez@gmail.com",
+    "telefono": "351-1111111",
+    "contraseña": "pass555",
+    "activo": true
+    }
+]

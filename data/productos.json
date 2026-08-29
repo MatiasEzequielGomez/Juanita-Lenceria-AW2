@@ -1,0 +1,73 @@
+[
+  {
+    "id": 1,
+    "nombre": "Corpiño de encaje",
+    "descripcion": "Corpiño de encaje con aro",
+    "categoria": "Corpiños",
+    "precio": 18500,
+    "stock": 12,
+    "imagen": "corpinio-encaje.jpg",
+    "disponible": true
+  },
+  {
+    "id": 2,
+    "nombre": "Bombacha de algodón",
+    "descripcion": "Bombacha clásica de algodón",
+    "categoria": "Bombachas",
+    "precio": 8500,
+    "stock": 20,
+    "imagen": "bombacha-algodon.jpg",
+    "disponible": true
+  },
+  {
+    "id": 3,
+    "nombre": "Conjunto de encaje",
+    "descripcion": "Conjunto de corpiño y bombacha de encaje",
+    "categoria": "Conjuntos",
+    "precio": 29000,
+    "stock": 8,
+    "imagen": "conjunto-encaje.jpg",
+    "disponible": true
+  },
+  {
+    "id": 4,
+    "nombre": "Camisón satinado",
+    "descripcion": "Camisón satinado con detalles de encaje",
+    "categoria": "Pijamas",
+    "precio": 24500,
+    "stock": 6,
+    "imagen": "camison-satinado.jpg",
+    "disponible": true
+  },
+  {
+    "id": 5,
+    "nombre": "Boxer de algodón",
+    "descripcion": "Boxer de algodón elastizado",
+    "categoria": "Boxers",
+    "precio": 12000,
+    "stock": 0,
+    "imagen": "boxer-algodon.jpg",
+    "disponible": false
+  },
+    {
+        "id": 6,
+        "nombre": "Conjunto deportivo",
+        "descripcion": "Conjunto deportivo de corpiño y bombacha",
+        "categoria": "Conjuntos",
+        "precio": 27000,
+        "stock": 10,
+        "imagen": "conjunto-deportivo.jpg",
+        "disponible": true
+    },
+    
+    {
+        "id": 7,
+        "nombre": "Camisón de seda",
+        "descripcion": "Camisón de seda con encaje",
+        "categoria": "Pijamas",
+        "precio": 32000,
+        "stock": 5,
+        "imagen": "camison-seda.jpg",
+        "disponible": true
+    }
+]

@@ -1,0 +1,141 @@
+[
+  {
+    "id": 1,
+    "id_usuario": 1,
+    "fecha": "2026-08-10",
+    "direccion": "Av. Colon 1250, Cordoba",
+    "productos": [
+      {
+        "id_producto": 1,
+        "cantidad": 1,
+        "precio_unitario": 18500
+      },
+      {
+        "id_producto": 2,
+        "cantidad": 2,
+        "precio_unitario": 8500
+      }
+    ],
+    "subtotal": 35500,
+    "descuento": false,
+    "importe_descuento": 0,
+    "total": 35500
+  },
+  {
+    "id": 2,
+    "id_usuario": 2,
+    "fecha": "2026-08-15",
+    "direccion": "San Martin 850, Cordoba",
+    "productos": [
+      {
+        "id_producto": 3,
+        "cantidad": 1,
+        "precio_unitario": 29000
+      }
+    ],
+    "subtotal": 29000,
+    "descuento": true,
+    "importe_descuento": 2900,
+    "total": 26100
+  },
+  {
+    "id": 3,
+    "id_usuario": 3,
+    "fecha": "2026-08-20",
+    "direccion": "Buenos Aires 430, Cordoba",
+    "productos": [
+      {
+        "id_producto": 4,
+        "cantidad": 1,
+        "precio_unitario": 24500
+      },
+      {
+        "id_producto": 6,
+        "cantidad": 1,
+        "precio_unitario": 27000
+      }
+    ],
+    "subtotal": 51500,
+    "descuento": false,
+    "importe_descuento": 0,
+    "total": 51500
+  },
+  {
+    "id": 4,
+    "id_usuario": 4,
+    "fecha": "2026-08-24",
+    "direccion": "General Paz 920, Cordoba",
+    "productos": [
+      {
+        "id_producto": 2,
+        "cantidad": 1,
+        "precio_unitario": 8500
+      },
+      {
+        "id_producto": 7,
+        "cantidad": 1,
+        "precio_unitario": 32000
+      }
+    ],
+    "subtotal": 40500,
+    "descuento": false,
+    "importe_descuento": 0,
+    "total": 40500
+  },
+    {
+        "id": 5,
+        "id_usuario": 5,
+        "fecha": "2026-07-30",
+        "direccion": "Independencia 1500, Cordoba",
+        "productos": [
+        {
+            "id_producto": 1,
+            "cantidad": 1,
+            "precio_unitario": 18500
+        },
+        {
+            "id_producto": 3,
+            "cantidad": 1,
+            "precio_unitario": 29000
+        }
+        ],
+        "subtotal": 47500,
+        "descuento": true,
+        "importe_descuento": 4750,
+        "total": 42750
+    },
+    {
+        "id": 6,
+        "id_usuario": 1,
+        "fecha": "2026-04-05",
+        "direccion": "Av. Colon 1250, Cordoba",
+        "productos": [
+        {
+            "id_producto": 4,
+            "cantidad": 2,
+            "precio_unitario": 24500
+        }
+        ],
+        "subtotal": 49000,
+        "descuento": false,
+        "importe_descuento": 0,
+        "total": 49000
+    },
+    {
+        "id": 7,
+        "id_usuario": 2,
+        "fecha": "2026-08-10",
+        "direccion": "San Martin 850, Cordoba",
+        "productos": [
+        {
+            "id_producto": 4,
+            "cantidad": 1,
+            "precio_unitario": 24500
+        }
+        ],
+        "subtotal": 24500,
+        "descuento": false,
+        "importe_descuento": 0,
+        "total": 24500
+    } 
+]
