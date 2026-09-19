@@ -26,7 +26,7 @@
     "contraseña": "pass333",
     "activo": true
   },
- {
+  {
     "id": 4,
     "nombre": "Mariana",
     "apellido": "Lopez",
@@ -34,8 +34,8 @@
     "telefono": "351-5555555",
     "contraseña": "pass444",
     "activo": true
-    },
-    {
+  },
+  {
     "id": 5,
     "nombre": "Santiago",
     "apellido": "Martinez",
@@ -43,5 +43,5 @@
     "telefono": "351-1111111",
     "contraseña": "pass555",
     "activo": true
-    }
+  }
 ]

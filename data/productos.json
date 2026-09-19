@@ -49,25 +49,24 @@
     "imagen": "boxer-algodon.jpg",
     "disponible": false
   },
-    {
-        "id": 6,
-        "nombre": "Conjunto deportivo",
-        "descripcion": "Conjunto deportivo de corpiño y bombacha",
-        "categoria": "Conjuntos",
-        "precio": 27000,
-        "stock": 10,
-        "imagen": "conjunto-deportivo.jpg",
-        "disponible": true
-    },
-    
-    {
-        "id": 7,
-        "nombre": "Camisón de seda",
-        "descripcion": "Camisón de seda con encaje",
-        "categoria": "Pijamas",
-        "precio": 32000,
-        "stock": 5,
-        "imagen": "camison-seda.jpg",
-        "disponible": true
-    }
+  {
+    "id": 6,
+    "nombre": "Conjunto deportivo",
+    "descripcion": "Conjunto deportivo de corpiño y bombacha",
+    "categoria": "Conjuntos",
+    "precio": 27000,
+    "stock": 10,
+    "imagen": "conjunto-deportivo.jpg",
+    "disponible": true
+  },
+  {
+    "id": 7,
+    "nombre": "Camisón de seda",
+    "descripcion": "Camisón de seda con encaje",
+    "categoria": "Pijamas",
+    "precio": 32000,
+    "stock": 5,
+    "imagen": "camison-seda.jpg",
+    "disponible": true
+  }
 ]
