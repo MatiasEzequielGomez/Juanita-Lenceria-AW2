@@ -8,18 +8,18 @@
             {
                 "id_producto": 1,
                 "cantidad": 1,
-                "precio_unitario": 18500
+                "precio_unitario": 12500
             },
             {
-                "id_producto": 2,
+                "id_producto": 20,
                 "cantidad": 2,
-                "precio_unitario": 8500
+                "precio_unitario": 18500
             }
         ],
-        "subtotal": 35500,
+        "subtotal": 49500,
         "descuento": false,
         "importe_descuento": 0,
-        "total": 35500
+        "total": 49500
     },
     {
         "id": 2,
@@ -28,15 +28,15 @@
         "direccion": "San Martin 850, Cordoba",
         "productos": [
             {
-                "id_producto": 3,
+                "id_producto": 27,
                 "cantidad": 1,
-                "precio_unitario": 29000
+                "precio_unitario": 26500
             }
         ],
-        "subtotal": 29000,
+        "subtotal": 26500,
         "descuento": true,
-        "importe_descuento": 2900,
-        "total": 26100
+        "importe_descuento": 2650,
+        "total": 23850
     },
     {
         "id": 3,
@@ -45,20 +45,20 @@
         "direccion": "Buenos Aires 430, Cordoba",
         "productos": [
             {
-                "id_producto": 4,
+                "id_producto": 7,
                 "cantidad": 1,
                 "precio_unitario": 24500
             },
             {
-                "id_producto": 6,
+                "id_producto": 34,
                 "cantidad": 1,
-                "precio_unitario": 27000
+                "precio_unitario": 6800
             }
         ],
-        "subtotal": 51500,
+        "subtotal": 31300,
         "descuento": false,
         "importe_descuento": 0,
-        "total": 51500
+        "total": 31300
     },
     {
         "id": 4,
@@ -67,20 +67,20 @@
         "direccion": "General Paz 920, Cordoba",
         "productos": [
             {
-                "id_producto": 2,
+                "id_producto": 21,
                 "cantidad": 1,
-                "precio_unitario": 8500
+                "precio_unitario": 19250
             },
             {
-                "id_producto": 7,
+                "id_producto": 45,
                 "cantidad": 1,
-                "precio_unitario": 32000
+                "precio_unitario": 19500
             }
         ],
-        "subtotal": 40500,
+        "subtotal": 38750,
         "descuento": false,
         "importe_descuento": 0,
-        "total": 40500
+        "total": 38750
     },
     {
         "id": 5,
@@ -89,20 +89,20 @@
         "direccion": "Independencia 1500, Cordoba",
         "productos": [
             {
-                "id_producto": 1,
+                "id_producto": 31,
                 "cantidad": 1,
-                "precio_unitario": 18500
+                "precio_unitario": 29500
             },
             {
-                "id_producto": 3,
-                "cantidad": 1,
-                "precio_unitario": 29000
+                "id_producto": 51,
+                "cantidad": 2,
+                "precio_unitario": 5800
             }
         ],
-        "subtotal": 47500,
+        "subtotal": 41100,
         "descuento": true,
-        "importe_descuento": 4750,
-        "total": 42750
+        "importe_descuento": 4110,
+        "total": 36990
     },
     {
         "id": 6,
@@ -111,15 +111,15 @@
         "direccion": "Av. Colon 1250, Cordoba",
         "productos": [
             {
-                "id_producto": 4,
+                "id_producto": 43,
                 "cantidad": 2,
-                "precio_unitario": 24500
+                "precio_unitario": 11300
             }
         ],
-        "subtotal": 49000,
+        "subtotal": 22600,
         "descuento": false,
         "importe_descuento": 0,
-        "total": 49000
+        "total": 22600
     },
     {
         "id": 7,
@@ -128,14 +128,14 @@
         "direccion": "San Martin 850, Cordoba",
         "productos": [
             {
-                "id_producto": 4,
+                "id_producto": 29,
                 "cantidad": 1,
-                "precio_unitario": 24500
+                "precio_unitario": 28000
             }
         ],
-        "subtotal": 24500,
+        "subtotal": 28000,
         "descuento": false,
         "importe_descuento": 0,
-        "total": 24500
+        "total": 28000
     }
 ]
