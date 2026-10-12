@@ -1,8 +1,22 @@
 import {
+  getProductos,
   addProducto,
   updatePrecioProducto,
   deleteProducto
 } from "../services/productos.services.js";
+
+// Obtener productos
+export const obtenerProductos = async (req, res) => {
+    try {
+        const productos = await getProductos();
+
+        res.status(200).json(productos);
+    } catch (error) {
+        res.status(500).json({
+            error: "Error al obtener los productos"
+        });
+    }
+};
 
 // Agregar producto
 export const crearProducto = async (req, res) => {

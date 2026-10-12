@@ -17,6 +17,13 @@ const guardarProductos = async (productos) => {
   );
 };
 
+// Obtener todos los productos
+export const getProductos = async () => {
+    const productos = await leerProductos();
+
+    return productos;
+};
+
 // Agregar producto
 export const addProducto = async (nuevoProducto) => {
   const productos = await leerProductos();
