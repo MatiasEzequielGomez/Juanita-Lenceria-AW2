@@ -1,10 +1,41 @@
 import {
+  loginUsuario,
   getUsuarios,
   getUsuarioById,
   addUsuario,
   modificarEstadoUsuario,
   deleteUsuario
 } from "../services/usuarios.services.js";
+
+// Login
+export const login = async (req, res) => {
+    try {
+        const { email, contraseña } = req.body;
+
+        const usuarioEncontrado = await loginUsuario(email, contraseña);
+
+        if (!usuarioEncontrado) {
+            console.log(`❌ Login fallido: ${email}`);
+
+            return res.status(401).json({
+                error: "Credenciales incorrectas"
+            });
+        }
+
+        console.log(`✅ Login OK: ${usuarioEncontrado.email}`);
+
+        res.status(200).json({
+            mensaje: `Autenticación exitosa, bienvenido ${usuarioEncontrado.nombre}!`,
+            usuario: usuarioEncontrado
+        });
+    } catch (error) {
+        console.error("Error en login:", error.message);
+
+        res.status(500).json({
+            error: "Error al autenticar el usuario"
+        });
+    }
+};
 
 // Obtener todos los usuarios
 export const obtenerUsuarios = async (req, res) => {

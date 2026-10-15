@@ -97,3 +97,26 @@ export const deleteUsuario = async (id) => {
 
   return usuarioEliminado;
 };
+
+export const loginUsuario = async (email, contraseña) => {
+    const usuarios = await leerUsuarios();
+
+    const usuario = usuarios.find(
+        usuario =>
+            usuario.email === email &&
+            usuario.contraseña === contraseña &&
+            usuario.activo
+    );
+
+    if (!usuario) {
+        return null;
+    }
+
+    const {
+        contraseña: password,
+        ...usuarioSinContraseña
+    } = usuario;
+
+    return usuarioSinContraseña;
+};
+

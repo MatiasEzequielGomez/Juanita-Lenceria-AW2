@@ -43,5 +43,14 @@
     "telefono": "351-1111111",
     "contraseña": "pass555",
     "activo": true
+  },
+  {
+    "id": 6,
+    "nombre": "Matias",
+    "apellido": "Gomez",
+    "email": "matiasgomez@gmail.com",
+    "telefono": "3511111111",
+    "contraseña": "pass666",
+    "activo": true
   }
 ]

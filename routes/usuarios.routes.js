@@ -1,6 +1,7 @@
 import { Router } from "express";
 
 import {
+  login,
   obtenerUsuarios,
   obtenerUsuarioPorId,
   crearUsuario,
@@ -9,6 +10,9 @@ import {
 } from "../controllers/usuarios.controller.js";
 
 const router = Router();
+
+// Login
+router.post("/login", login);
 
 // Obtener todos los usuarios
 router.get("/", obtenerUsuarios);
