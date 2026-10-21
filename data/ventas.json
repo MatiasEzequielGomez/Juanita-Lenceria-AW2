@@ -171,5 +171,56 @@
     "descuento": false,
     "importe_descuento": 0,
     "total": 12500
+  },
+  {
+    "id": 10,
+    "id_usuario": 6,
+    "fecha": "2026-10-17",
+    "direccion": "Av. Colón 123",
+    "productos": [
+      {
+        "id_producto": 1,
+        "cantidad": 1,
+        "precio_unitario": 12500
+      }
+    ],
+    "subtotal": 12500,
+    "descuento": false,
+    "importe_descuento": 0,
+    "total": 12500
+  },
+  {
+    "id": 11,
+    "id_usuario": 6,
+    "fecha": "2026-10-20",
+    "direccion": "Av. Colón 123",
+    "productos": [
+      {
+        "id_producto": 7,
+        "cantidad": 2,
+        "precio_unitario": 24500
+      }
+    ],
+    "subtotal": 49000,
+    "descuento": false,
+    "importe_descuento": 0,
+    "total": 49000
+  },
+  {
+    "id": 12,
+    "id_usuario": 6,
+    "fecha": "2026-10-20",
+    "direccion": "Av. Colón 123",
+    "productos": [
+      {
+        "id_producto": 41,
+        "cantidad": 1,
+        "precio_unitario": 9800
+      }
+    ],
+    "subtotal": 9800,
+    "descuento": false,
+    "importe_descuento": 0,
+    "total": 9800
   }
 ]

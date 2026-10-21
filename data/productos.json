@@ -6,7 +6,7 @@
     "categoria": "Hombres",
     "subcategoria": "Ropa interior",
     "precio": 12500,
-    "stock": 6,
+    "stock": 5,
     "imagen": "Hombres/RopaInterior/ropaInterior1.webp",
     "disponible": true
   },
@@ -72,7 +72,7 @@
     "categoria": "Hombres",
     "subcategoria": "Pijamas",
     "precio": 24500,
-    "stock": 3,
+    "stock": 1,
     "imagen": "Hombres/Pijamas/pijama1.webp",
     "disponible": true
   },
@@ -446,7 +446,7 @@
     "categoria": "Niños",
     "subcategoria": "Ropa interior",
     "precio": 9800,
-    "stock": 5,
+    "stock": 4,
     "imagen": "Niños/RopaInterior/ropaInterior1.webp",
     "disponible": true
   },
