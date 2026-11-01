@@ -11,10 +11,7 @@ const leerUsuarios = async () => {
 
 // Guardar usuarios
 const guardarUsuarios = async (usuarios) => {
-  await writeFile(
-    rutaUsuarios,
-    JSON.stringify(usuarios, null, 2)
-  );
+  await writeFile(rutaUsuarios, JSON.stringify(usuarios, null, 2));
 };
 
 // Obtener todos los usuarios
@@ -26,26 +23,42 @@ export const getUsuarios = async () => {
 export const getUsuarioById = async (id) => {
   const usuarios = await leerUsuarios();
 
-  return usuarios.find(usuario => usuario.id === id);
+  return usuarios.find((usuario) => usuario.id === id);
 };
 
 // Agregar usuario
 export const addUsuario = async (nuevoUsuario) => {
   const usuarios = await leerUsuarios();
 
+  const emailIngresado = nuevoUsuario.email.trim().toLowerCase();
+  const telefonoIngresado = nuevoUsuario.telefono.trim();
+
+  const telefonoValido = /^[0-9]{8,15}$/.test(telefonoIngresado);
+
+  if (!telefonoValido) {
+    return "TELEFONO_INVALIDO";
+  }
+  const emailExistente = usuarios.some(
+    (usuario) => usuario.email.trim().toLowerCase() === emailIngresado,
+  );
+
+  if (emailExistente) {
+    return "EMAIL_EXISTENTE";
+  }
+
   const nuevoId =
     usuarios.length > 0
-      ? Math.max(...usuarios.map(usuario => usuario.id)) + 1
+      ? Math.max(...usuarios.map((usuario) => usuario.id)) + 1
       : 1;
 
   const usuario = {
     id: nuevoId,
     nombre: nuevoUsuario.nombre,
     apellido: nuevoUsuario.apellido,
-    email: nuevoUsuario.email,
-    telefono: nuevoUsuario.telefono,
+    email: nuevoUsuario.email.trim(),
+    telefono: telefonoIngresado,
     contraseña: nuevoUsuario.contraseña,
-    activo: true
+    activo: true,
   };
 
   usuarios.push(usuario);
@@ -59,7 +72,7 @@ export const addUsuario = async (nuevoUsuario) => {
 export const modificarEstadoUsuario = async (id, activo) => {
   const usuarios = await leerUsuarios();
 
-  const usuario = usuarios.find(usuario => usuario.id === id);
+  const usuario = usuarios.find((usuario) => usuario.id === id);
 
   if (!usuario) {
     return null;
@@ -76,7 +89,7 @@ export const modificarEstadoUsuario = async (id, activo) => {
 export const deleteUsuario = async (id) => {
   const usuarios = await leerUsuarios();
 
-  const index = usuarios.findIndex(usuario => usuario.id === id);
+  const index = usuarios.findIndex((usuario) => usuario.id === id);
 
   if (index === -1) {
     return null;
@@ -85,7 +98,7 @@ export const deleteUsuario = async (id) => {
   const archivoVentas = await readFile(rutaVentas, "utf-8");
   const ventas = JSON.parse(archivoVentas);
 
-  const tieneVentas = ventas.some(venta => venta.id_usuario === id);
+  const tieneVentas = ventas.some((venta) => venta.id_usuario === id);
 
   if (tieneVentas) {
     return "TIENE_VENTAS";
@@ -99,24 +112,20 @@ export const deleteUsuario = async (id) => {
 };
 
 export const loginUsuario = async (email, contraseña) => {
-    const usuarios = await leerUsuarios();
+  const usuarios = await leerUsuarios();
 
-    const usuario = usuarios.find(
-        usuario =>
-            usuario.email === email &&
-            usuario.contraseña === contraseña &&
-            usuario.activo
-    );
+  const usuario = usuarios.find(
+    (usuario) =>
+      usuario.email === email &&
+      usuario.contraseña === contraseña &&
+      usuario.activo,
+  );
 
-    if (!usuario) {
-        return null;
-    }
+  if (!usuario) {
+    return null;
+  }
 
-    const {
-        contraseña: password,
-        ...usuarioSinContraseña
-    } = usuario;
+  const { contraseña: password, ...usuarioSinContraseña } = usuario;
 
-    return usuarioSinContraseña;
+  return usuarioSinContraseña;
 };
-

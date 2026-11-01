@@ -4,37 +4,37 @@ import {
   getUsuarioById,
   addUsuario,
   modificarEstadoUsuario,
-  deleteUsuario
+  deleteUsuario,
 } from "../services/usuarios.services.js";
 
 // Login
 export const login = async (req, res) => {
-    try {
-        const { email, contraseña } = req.body;
+  try {
+    const { email, contraseña } = req.body;
 
-        const usuarioEncontrado = await loginUsuario(email, contraseña);
+    const usuarioEncontrado = await loginUsuario(email, contraseña);
 
-        if (!usuarioEncontrado) {
-            console.log(`❌ Login fallido: ${email}`);
+    if (!usuarioEncontrado) {
+      console.log(`❌ Login fallido: ${email}`);
 
-            return res.status(401).json({
-                error: "Credenciales incorrectas"
-            });
-        }
-
-        console.log(`✅ Login OK: ${usuarioEncontrado.email}`);
-
-        res.status(200).json({
-            mensaje: `Autenticación exitosa, bienvenido ${usuarioEncontrado.nombre}!`,
-            usuario: usuarioEncontrado
-        });
-    } catch (error) {
-        console.error("Error en login:", error.message);
-
-        res.status(500).json({
-            error: "Error al autenticar el usuario"
-        });
+      return res.status(401).json({
+        error: "Credenciales incorrectas",
+      });
     }
+
+    console.log(`✅ Login OK: ${usuarioEncontrado.email}`);
+
+    res.status(200).json({
+      mensaje: `Autenticación exitosa, bienvenido ${usuarioEncontrado.nombre}!`,
+      usuario: usuarioEncontrado,
+    });
+  } catch (error) {
+    console.error("Error en login:", error.message);
+
+    res.status(500).json({
+      error: "Error al autenticar el usuario",
+    });
+  }
 };
 
 // Obtener todos los usuarios
@@ -44,7 +44,7 @@ export const obtenerUsuarios = async (req, res) => {
     res.status(200).json(usuarios);
   } catch (error) {
     res.status(500).json({
-      error: "Error al obtener los usuarios"
+      error: "Error al obtener los usuarios",
     });
   }
 };
@@ -58,15 +58,14 @@ export const obtenerUsuarioPorId = async (req, res) => {
 
     if (!usuario) {
       return res.status(404).json({
-        error: "No se encontró el usuario"
+        error: "No se encontró el usuario",
       });
     }
 
     res.status(200).json(usuario);
-
   } catch (error) {
     res.status(500).json({
-      error: "Error al obtener el usuario"
+      error: "Error al obtener el usuario",
     });
   }
 };
@@ -75,11 +74,21 @@ export const obtenerUsuarioPorId = async (req, res) => {
 export const crearUsuario = async (req, res) => {
   try {
     const nuevoUsuario = await addUsuario(req.body);
+    if (nuevoUsuario === "TELEFONO_INVALIDO") {
+      return res.status(400).json({
+        error: "El teléfono debe contener entre 8 y 15 números",
+      });
+    }
+    if (nuevoUsuario === "EMAIL_EXISTENTE") {
+      return res.status(409).json({
+        error: "El email ya se encuentra registrado",
+      });
+    }
 
     res.status(201).json(nuevoUsuario);
   } catch (error) {
     res.status(500).json({
-      error: "Error al agregar usuario"
+      error: "Error al agregar usuario",
     });
   }
 };
@@ -94,18 +103,17 @@ export const cambiarEstadoUsuario = async (req, res) => {
 
     if (!usuario) {
       return res.status(404).json({
-        error: "No se encontró el usuario"
+        error: "No se encontró el usuario",
       });
     }
 
     res.status(200).json({
       mensaje: "Estado del usuario modificado",
-      usuario
+      usuario,
     });
-
   } catch (error) {
     res.status(500).json({
-      error: "Error al modificar el estado del usuario"
+      error: "Error al modificar el estado del usuario",
     });
   }
 };
@@ -119,24 +127,23 @@ export const eliminarUsuario = async (req, res) => {
 
     if (resultado === "TIENE_VENTAS") {
       return res.status(400).json({
-        error: "No se puede eliminar porque tiene ventas asociadas"
+        error: "No se puede eliminar porque tiene ventas asociadas",
       });
     }
 
     if (!resultado) {
       return res.status(404).json({
-        error: "No se encontró el usuario"
+        error: "No se encontró el usuario",
       });
     }
 
     res.status(200).json({
       mensaje: "Usuario eliminado",
-      usuario: resultado
+      usuario: resultado,
     });
-
   } catch (error) {
     res.status(500).json({
-      error: "Error al eliminar usuario"
+      error: "Error al eliminar usuario",
     });
   }
 };
