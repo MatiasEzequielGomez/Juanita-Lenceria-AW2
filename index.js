@@ -5,8 +5,9 @@ import productosRouter from './routes/productos.routes.js'
 import usuariosRouter from './routes/usuarios.routes.js'
 import ventasRouter from './routes/ventas.routes.js'
 import logger from "./middlewares/logger.middleware.js";
+import { connectDB } from "./config/db.js";
 dotenv.config()
-
+await connectDB();
 const app= express()
 
 const PORT = process.env.PORT || 3001;

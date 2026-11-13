@@ -1,7 +1,7 @@
 import {
   getVentasByFecha,
   getVentasByUsuarioId,
-  addVenta
+  addVenta,
 } from "../services/ventas.services.js";
 
 // Obtener ventas por rango de fechas
@@ -14,14 +14,14 @@ export const obtenerVentasPorFecha = async (req, res) => {
     res.status(200).json(ventas);
   } catch (error) {
     res.status(500).json({
-      error: "Error al obtener las ventas por fecha"
+      error: "Error al obtener las ventas por fecha",
     });
   }
 };
 
 // Obtener ventas por ID de usuario
 export const obtenerVentasPorUsuario = async (req, res) => {
-  const id = parseInt(req.params.id);
+  const id = req.params.id;
 
   try {
     const ventas = await getVentasByUsuarioId(id);
@@ -29,7 +29,7 @@ export const obtenerVentasPorUsuario = async (req, res) => {
     res.status(200).json(ventas);
   } catch (error) {
     res.status(500).json({
-      error: "Error al obtener las ventas del usuario"
+      error: "Error al obtener las ventas del usuario",
     });
   }
 };
@@ -37,32 +37,36 @@ export const obtenerVentasPorUsuario = async (req, res) => {
 // Agregar venta
 export const crearVenta = async (req, res) => {
   try {
-    const nuevaVenta = await addVenta(req.body);
+    const datosVenta = {
+      ...req.body,
+      id_usuario: req.usuario.id,
+    };
 
+    const nuevaVenta = await addVenta(datosVenta);
     if (nuevaVenta === "USUARIO_INVALIDO") {
       return res.status(400).json({
-        error: "Usuario inválido"
+        error: "Usuario inválido",
       });
     }
 
     if (nuevaVenta === "PRODUCTO_INVALIDO") {
       return res.status(400).json({
-        error: "Producto inválido"
+        error: "Producto inválido",
       });
     }
 
     if (nuevaVenta === "STOCK_INSUFICIENTE") {
       return res.status(400).json({
-        error: "Stock insuficiente"
+        error: "Stock insuficiente",
       });
     }
 
     res.status(201).json(nuevaVenta);
-} catch (error) {
-  console.error("Error al crear la venta:", error);
+  } catch (error) {
+    console.error("Error al crear la venta:", error);
 
-  res.status(500).json({
-    error: "Error al crear la venta"
-  });
-}
+    res.status(500).json({
+      error: "Error al crear la venta",
+    });
+  }
 };

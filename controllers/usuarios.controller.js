@@ -6,6 +6,7 @@ import {
   modificarEstadoUsuario,
   deleteUsuario,
 } from "../services/usuarios.services.js";
+import jwt from "jsonwebtoken";
 
 // Login
 export const login = async (req, res) => {
@@ -23,10 +24,18 @@ export const login = async (req, res) => {
     }
 
     console.log(`✅ Login OK: ${usuarioEncontrado.email}`);
+    const payload = {
+      id: usuarioEncontrado._id.toString(),
+      email: usuarioEncontrado.email,
+    };
 
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {
+      expiresIn: "2h",
+    });
     res.status(200).json({
       mensaje: `Autenticación exitosa, bienvenido ${usuarioEncontrado.nombre}!`,
       usuario: usuarioEncontrado,
+      token,
     });
   } catch (error) {
     console.error("Error en login:", error.message);
@@ -41,6 +50,7 @@ export const login = async (req, res) => {
 export const obtenerUsuarios = async (req, res) => {
   try {
     const usuarios = await getUsuarios();
+
     res.status(200).json(usuarios);
   } catch (error) {
     res.status(500).json({
@@ -51,7 +61,7 @@ export const obtenerUsuarios = async (req, res) => {
 
 // Obtener usuario por ID
 export const obtenerUsuarioPorId = async (req, res) => {
-  const id = parseInt(req.params.id);
+  const id = req.params.id;
 
   try {
     const usuario = await getUsuarioById(id);
@@ -74,11 +84,13 @@ export const obtenerUsuarioPorId = async (req, res) => {
 export const crearUsuario = async (req, res) => {
   try {
     const nuevoUsuario = await addUsuario(req.body);
+
     if (nuevoUsuario === "TELEFONO_INVALIDO") {
       return res.status(400).json({
         error: "El teléfono debe contener entre 8 y 15 números",
       });
     }
+
     if (nuevoUsuario === "EMAIL_EXISTENTE") {
       return res.status(409).json({
         error: "El email ya se encuentra registrado",
@@ -95,7 +107,7 @@ export const crearUsuario = async (req, res) => {
 
 // Modificar estado del usuario
 export const cambiarEstadoUsuario = async (req, res) => {
-  const id = parseInt(req.params.id);
+  const id = req.params.id;
   const activo = req.body.activo;
 
   try {
@@ -120,7 +132,7 @@ export const cambiarEstadoUsuario = async (req, res) => {
 
 // Eliminar usuario
 export const eliminarUsuario = async (req, res) => {
-  const id = parseInt(req.params.id);
+  const id = req.params.id;
 
   try {
     const resultado = await deleteUsuario(id);

@@ -2,20 +2,20 @@ import {
   getProductos,
   addProducto,
   updatePrecioProducto,
-  deleteProducto
+  deleteProducto,
 } from "../services/productos.services.js";
 
 // Obtener productos
 export const obtenerProductos = async (req, res) => {
-    try {
-        const productos = await getProductos();
+  try {
+    const productos = await getProductos();
 
-        res.status(200).json(productos);
-    } catch (error) {
-        res.status(500).json({
-            error: "Error al obtener los productos"
-        });
-    }
+    res.status(200).json(productos);
+  } catch (error) {
+    res.status(500).json({
+      error: "Error al obtener los productos",
+    });
+  }
 };
 
 // Agregar producto
@@ -26,14 +26,14 @@ export const crearProducto = async (req, res) => {
     res.status(201).json(nuevoProducto);
   } catch (error) {
     res.status(500).json({
-      error: "Error al agregar producto"
+      error: "Error al agregar producto",
     });
   }
 };
 
 // Modificar precio
 export const modificarPrecioProducto = async (req, res) => {
-  const id = parseInt(req.params.id);
+  const id = req.params.id;
   const nuevoPrecio = req.body.precio;
 
   try {
@@ -41,49 +41,47 @@ export const modificarPrecioProducto = async (req, res) => {
 
     if (!producto) {
       return res.status(404).json({
-        error: "No se encontró el producto"
+        error: "No se encontró el producto",
       });
     }
 
     res.status(200).json({
       mensaje: "Precio modificado",
-      producto
+      producto,
     });
-
   } catch (error) {
     res.status(500).json({
-      error: "Error al modificar precio"
+      error: "Error al modificar precio",
     });
   }
 };
 
 // Eliminar producto
 export const eliminarProducto = async (req, res) => {
-  const id = parseInt(req.params.id);
+  const id = req.params.id;
 
   try {
     const resultado = await deleteProducto(id);
 
     if (resultado === "TIENE_VENTAS") {
       return res.status(400).json({
-        error: "No se puede eliminar porque tiene ventas asociadas"
+        error: "No se puede eliminar porque tiene ventas asociadas",
       });
     }
 
     if (!resultado) {
       return res.status(404).json({
-        error: "No se encontró el producto"
+        error: "No se encontró el producto",
       });
     }
 
     res.status(200).json({
       mensaje: "Producto eliminado",
-      producto: resultado
+      producto: resultado,
     });
-
   } catch (error) {
     res.status(500).json({
-      error: "Error al eliminar producto"
+      error: "Error al eliminar producto",
     });
   }
 };

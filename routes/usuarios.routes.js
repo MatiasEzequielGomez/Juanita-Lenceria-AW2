@@ -1,5 +1,5 @@
 import { Router } from "express";
-
+import { verificarToken } from "../middlewares/auth.middleware.js";
 import {
   login,
   obtenerUsuarios,
@@ -23,10 +23,17 @@ router.get("/:id", obtenerUsuarioPorId);
 // Agregar usuario
 router.post("/", crearUsuario);
 
-// Modificar estado del usuario
-router.put("/:id/estado", cambiarEstadoUsuario);
+router.put(
+  "/:id/estado",
+  verificarToken,
+  cambiarEstadoUsuario,
+);
 
 // Eliminar usuario
-router.delete("/:id", eliminarUsuario);
+router.delete(
+  "/:id",
+  verificarToken,
+  eliminarUsuario,
+);
 
 export default router;

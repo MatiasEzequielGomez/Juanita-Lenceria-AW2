@@ -3,8 +3,10 @@ import { Router } from "express";
 import {
   obtenerVentasPorFecha,
   obtenerVentasPorUsuario,
-  crearVenta
+  crearVenta,
 } from "../controllers/ventas.controller.js";
+
+import { verificarToken } from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
@@ -14,6 +16,7 @@ router.get("/", obtenerVentasPorFecha);
 // Obtener ventas por ID de usuario
 router.get("/usuario/:id", obtenerVentasPorUsuario);
 
-router.post("/", crearVenta);
+// Crear venta
+router.post("/", verificarToken, crearVenta);
 
 export default router;

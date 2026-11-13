@@ -1,129 +1,104 @@
-import { readFile, writeFile } from "fs/promises";
-import dayjs from "dayjs";
-
-const rutaVentas = "./data/ventas.json";
-const rutaProductos = "./data/productos.json";
-const rutaUsuarios = "./data/usuarios.json";
-// Leer ventas
-const leerVentas = async () => {
-  const archivo = await readFile(rutaVentas, "utf-8");
-  return JSON.parse(archivo);
-};
-
-const guardarVentas = async (ventas) => {
-    await writeFile(
-        rutaVentas,
-        JSON.stringify(ventas, null, 2)
-    );
-};
+import Venta from "../models/venta.model.js";
+import Producto from "../models/producto.model.js";
+import Usuario from "../models/usuario.model.js";
 
 // Obtener ventas por rango de fechas
 export const getVentasByFecha = async (from, to) => {
-  const ventas = await leerVentas();
+  const desde = new Date(`${from}T00:00:00.000Z`);
+  const hasta = new Date(`${to}T23:59:59.999Z`);
 
-  return ventas.filter(
-    venta => venta.fecha >= from && venta.fecha <= to
-  );
+  return await Venta.find({
+    fecha: {
+      $gte: desde,
+      $lte: hasta,
+    },
+  })
+    .populate("id_usuario", "nombre apellido email")
+    .populate(
+      "productos.id_producto",
+      "nombre precio categoria subcategoria",
+    );
 };
 
 // Obtener ventas por ID de usuario
 export const getVentasByUsuarioId = async (id) => {
-  const ventas = await leerVentas();
-
-  return ventas.filter(
-    venta => venta.id_usuario === id
-  );
+  return await Venta.find({
+    id_usuario: id,
+  })
+    .populate("id_usuario", "nombre apellido email")
+    .populate(
+      "productos.id_producto",
+      "nombre precio categoria subcategoria",
+    );
 };
 
 // Agregar venta
 export const addVenta = async (nuevaVenta) => {
-    const ventas = await leerVentas();
+  const usuario = await Usuario.findOne({
+    _id: nuevaVenta.id_usuario,
+    activo: true,
+  });
 
-    const archivoProductos = await readFile(rutaProductos, "utf-8");
-    const productos = JSON.parse(archivoProductos);
+  if (!usuario) {
+    return "USUARIO_INVALIDO";
+  }
 
-    const archivoUsuarios = await readFile(rutaUsuarios, "utf-8");
-    const usuarios = JSON.parse(archivoUsuarios);
+  const productosVenta = [];
+  const productosActualizar = [];
 
-    const usuario = usuarios.find(
-        usuario =>
-            usuario.id === nuevaVenta.id_usuario &&
-            usuario.activo
-    );
+  for (const item of nuevaVenta.productos) {
+    const producto = await Producto.findById(item.id_producto);
 
-    if (!usuario) {
-        return "USUARIO_INVALIDO";
+    if (!producto) {
+      return "PRODUCTO_INVALIDO";
     }
 
-    const productosVenta = [];
-
-    for (const item of nuevaVenta.productos) {
-        const producto = productos.find(
-            producto => producto.id === item.id_producto
-        );
-
-        if (!producto) {
-            return "PRODUCTO_INVALIDO";
-        }
-
-        if (
-            !producto.disponible ||
-            item.cantidad <= 0 ||
-            item.cantidad > producto.stock
-        ) {
-            return "STOCK_INSUFICIENTE";
-        }
-
-        productosVenta.push({
-            id_producto: producto.id,
-            cantidad: item.cantidad,
-            precio_unitario: producto.precio
-        });
+    if (
+      !producto.disponible ||
+      item.cantidad <= 0 ||
+      item.cantidad > producto.stock
+    ) {
+      return "STOCK_INSUFICIENTE";
     }
 
-    productosVenta.forEach(item => {
-        const producto = productos.find(
-            producto => producto.id === item.id_producto
-        );
-
-        producto.stock -= item.cantidad;
-
-        if (producto.stock === 0) {
-            producto.disponible = false;
-        }
+    productosVenta.push({
+      id_producto: producto._id,
+      cantidad: item.cantidad,
+      precio_unitario: producto.precio,
     });
 
-    const subtotal = productosVenta.reduce(
-        (total, item) =>
-            total + item.precio_unitario * item.cantidad,
-        0
-    );
+    productosActualizar.push({
+      producto,
+      cantidad: item.cantidad,
+    });
+  }
 
-    const nuevoId =
-        ventas.length > 0
-            ? Math.max(...ventas.map(venta => venta.id)) + 1
-            : 1;
+  const subtotal = productosVenta.reduce(
+    (total, item) =>
+      total + item.precio_unitario * item.cantidad,
+    0,
+  );
 
-    const venta = {
-        id: nuevoId,
-        id_usuario: nuevaVenta.id_usuario,
-        fecha: dayjs().format("YYYY-MM-DD"),
-        direccion: nuevaVenta.direccion,
-        productos: productosVenta,
-        subtotal,
-        descuento: false,
-        importe_descuento: 0,
-        total: subtotal
-    };
+  const venta = await Venta.create({
+    id_usuario: usuario._id,
+    direccion: nuevaVenta.direccion,
+    productos: productosVenta,
+    subtotal,
+    descuento: false,
+    importe_descuento: 0,
+    total: subtotal,
+  });
 
-    ventas.push(venta);
+  // Actualizar stock de los productos
+  for (const item of productosActualizar) {
+    item.producto.stock -= item.cantidad;
 
-    await guardarVentas(ventas);
+    if (item.producto.stock === 0) {
+      item.producto.disponible = false;
+    }
 
-    await writeFile(
-        rutaProductos,
-        JSON.stringify(productos, null, 2)
-    );
+    await item.producto.save();
+  }
 
-    return venta;
+  return venta;
 };

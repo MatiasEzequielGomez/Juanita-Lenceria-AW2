@@ -4,8 +4,10 @@ import {
   obtenerProductos,
   crearProducto,
   modificarPrecioProducto,
-  eliminarProducto
+  eliminarProducto,
 } from "../controllers/productos.controller.js";
+
+import { verificarToken } from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
@@ -13,12 +15,20 @@ const router = Router();
 router.get("/", obtenerProductos);
 
 // Agregar producto
-router.post("/", crearProducto);
+router.post("/", verificarToken, crearProducto);
 
 // Modificar precio de producto
-router.put("/:id/precio", modificarPrecioProducto);
+router.put(
+  "/:id/precio",
+  verificarToken,
+  modificarPrecioProducto,
+);
 
 // Eliminar producto
-router.delete("/:id", eliminarProducto);
+router.delete(
+  "/:id",
+  verificarToken,
+  eliminarProducto,
+);
 
 export default router;
